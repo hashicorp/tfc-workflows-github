@@ -1,0 +1,57 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: "TFC - Upload Configuration"
+description: "Creates and uploads configuration files for a given workspace"
+
+inputs:
+  # global flags
+  hostname:
+    required: false
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    default: ""
+  token:
+    required: false
+    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    default: ""
+  organization:
+    required: false
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    default: ""
+  # required
+  workspace:
+    required: true
+    description: "The name of the workspace to create the new configuration version in."
+  directory:
+    required: true
+    description: "Path to the configuration files on disk."
+  # optional
+  speculative:
+    required: false
+    description: "When true, this configuration version may only be used to create runs which are speculative, that is, can neither be confirmed nor applied."
+    default: "false"
+
+outputs:
+  status:
+    description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
+  payload:
+    description: "JSON response from Terraform Cloud of the created Configuration Version."
+  configuration_version_id:
+    description: "The Configuration Version ID that was created."
+  configuration_version_status:
+    description: "Current status of the created configuration version."
+
+runs:
+  using: docker
+  image: 'docker://mjyocca/tfci:latest'
+  args:
+  - tfci
+  ## global flags
+  - -hostname=${{ inputs.hostname }}
+  - -token=${{ inputs.token }}
+  - -organization=${{ inputs.organization }}
+  ## command arguments
+  - upload
+  - -workspace=${{ inputs.workspace }}
+  - -directory=${{ inputs.directory }}
+  - -speculative=${{ inputs.speculative }}

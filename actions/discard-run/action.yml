@@ -1,0 +1,50 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: 'TFC - Discard Run'
+description: "Skips any remaining work on runs that are paused waiting for confirmation or priority."
+
+inputs:
+  # global flags
+  hostname:
+    required: false
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    default: ""
+  token:
+    required: false
+    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    default: ""
+  organization:
+    required: false
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    default: ""
+  run:
+    required: true
+    description: "The run ID to discard."
+  comment:
+    required: false
+    description: "An optional comment about the run."
+    default: ""
+
+outputs:
+  status:
+    description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
+  run_id:
+    description: "The provided run ID."
+  run_status:
+    description: "The current status of the Terraform Cloud run."
+
+runs:
+  using: docker
+  image: 'docker://mjyocca/tfci:latest'
+  args:
+    - tfci
+    ## global flags
+    - -hostname=${{ inputs.hostname }}
+    - -token=${{ inputs.token }}
+    - -organization=${{ inputs.organization }}
+    ## command
+    - run
+    - discard
+    - -run=${{ inputs.run }}
+    - -comment=${{ inputs.comment }}

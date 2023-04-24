@@ -1,0 +1,61 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: 'TFC - Show Run'
+description: "Returns run details for the corresponding run ID"
+
+inputs:
+  # global flags
+  hostname:
+    required: false
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    default: ""
+  token:
+    required: false
+    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    default: ""
+  organization:
+    required: false
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    default: ""
+  run:
+    required: true
+    description: "The run ID to show."
+
+outputs:
+  status:
+    description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
+  payload:
+    description: "JSON response of Terraform Cloud run."
+  run_id:
+    description: "The provided run ID."
+  run_status:
+    description: "The current status of the Terraform Cloud run."
+  run_message:
+    description: "The message attribute of the shown run."
+  run_link:
+    description: "Link to view the run in Terraform Cloud."
+  configuration_version_id:
+    description: "The configuration version ID of the run."
+  plan_id:
+    description: "The plan ID for the current run."
+  plan_status:
+    description: "The plan status for the associated run."
+  cost_estimation_id:
+    description: "The ID of the cost estimation for the associated run. (If cost estimation is enabled)"
+  cost_estimation_status:
+    description: "The cost estimation status for the associated run. (If cost estimation is enabled)"
+
+runs:
+  using: docker
+  image: 'docker://mjyocca/tfci:latest'
+  args:
+  - tfci
+  ## global flags
+  - -hostname=${{ inputs.hostname }}
+  - -token=${{ inputs.token }}
+  - -organization=${{ inputs.organization }}
+  ## command
+  - run
+  - show
+  - -run=${{ inputs.run }}

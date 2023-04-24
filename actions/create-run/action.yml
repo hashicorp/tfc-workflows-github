@@ -1,0 +1,78 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: 'TFC - Create Run'
+description: "Performs a new plan run in Terraform Cloud, using a configuration version and the workspace`s current variables"
+
+inputs:
+  # global flags
+  hostname:
+    required: false
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    default: ""
+  token:
+    required: false
+    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    default: ""
+  organization:
+    required: false
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    default: ""
+  ## required
+  workspace:
+    required: true
+    description: "The Workspace name that specifies where the run will be executed"
+  ## optional
+  configuration_version:
+    required: false
+    description: "Specifies the configuration version to use for this run. Defaults to the last run configuration."
+    default: ""
+  message:
+    required: false
+    description: "Specifies the message to be associated with this run. Default message will be generated."
+    default: ""
+  plan_only:
+    required: false
+    description: Specifies if this is a speculative, plan-only run that Terraform cannot apply."
+    default: "false"
+
+outputs:
+  status:
+    description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
+  payload:
+    description: "JSON response of a Terraform Cloud run."
+  run_id:
+    description: "The ID of the created run."
+  run_status:
+    description: "The current status of the Terraform Cloud run."
+  run_message:
+    description: "The message attribute of the shown run."
+  run_link:
+    description: "Link to view the run in Terraform Cloud."
+  plan_id:
+    description: "The ID of the plan, associated to the created run."
+  plan_status:
+    description: "The plan status for the associated run."
+  configuration_version_id:
+    description: "The configuration version ID of the run."
+  cost_estimation_id:
+    description: "The ID of the cost estimation for the associated run. (If cost estimation is enabled)"
+  cost_estimation_status:
+    description: "The cost estimation status for the associated run. (If cost estimation is enabled)"
+
+runs:
+  using: docker
+  image: 'docker://mjyocca/tfci:latest'
+  args:
+  - tfci
+  ## global flags
+  - -hostname=${{ inputs.hostname }}
+  - -token=${{ inputs.token }}
+  - -organization=${{ inputs.organization }}
+  ## command
+  - run
+  - create
+  - -workspace=${{ inputs.workspace }}
+  - -configuration_version=${{ inputs.configuration_version }}
+  - -message=${{ inputs.message }}
+  - -plan-only=${{ inputs.plan_only }}

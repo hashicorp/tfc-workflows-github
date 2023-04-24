@@ -1,0 +1,99 @@
+# This template is pre-configured to run what's known as a speculative plan in Terraform Cloud.
+# Speculative plans are plan-only runs to test changes to configuration. Perfect for code reviews on a Pull Request.
+#
+# This workflow is configured to trigger when a pull request is opened against your `main` branch,
+# **IF** the set paths contain files that have changed. If the workflow runs, the included steps will upload your terraform configuration, create a new run, and output the plan information to a PR comment.
+#
+# NOTE: The last step in this template includes a script that will upsert a PR comment. (REQUIRES `Read and write permissions`)
+---
+name: Terraform Cloud Speculative Run
+
+on:
+  pull_request:
+    branches:
+    ## RECOMMENDED: Change for your target branch, or include branches you wish to trigger this workflow file.
+      - main
+    ## RECOMMENDED: Specify to only run this workflow file when terraform configuration has changed.
+    paths:
+      - "<<INPUT REQUIRED>>" ## Example: 'terraform/**.tf'
+
+## Add shared Environment Variables across jobs here ##
+env:
+  TF_CLOUD_ORGANIZATION: "<<INPUT REQUIRED>>" ## Name of your existing Terraform Cloud Organization. RECOMMENDED: use repository variables. ex. "${{ vars.TF_CLOUD_ORGANIZATION }}"
+  TF_API_TOKEN: "<<INPUT REQUIRED>>" ## Terraform Cloud API Token. RECOMMENDED: replace with github action secrets. ex. "${{ secrets.TF_API_TOKEN }}"
+  TF_WORKSPACE: "<<INPUT REQUIRED>>" ## Name of your existing workspace in Terraform Cloud.
+  CONFIG_DIRECTORY: "<<INPUT REQUIRED>>" ## Directory of your Terraform Configuration. Relative to the project root.
+  ## Additional env variables
+  # TF_LOG: DEBUG ## Helpful for troubleshooting
+  # TF_MAX_TIMEOUT: "30m" ## If you wish to override the default "1h"
+
+jobs:
+  terraform-cloud-speculative-run:
+    runs-on: ubuntu-latest
+    ## OPTIONAL: can scope variables to this specific job
+    ## Example:
+    # env:
+    #  TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORG }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
+        id: upload
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+          speculative: true
+
+      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        id: run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
+          plan_only: true
+          ## OPTIONAL: set your own message for run. A default message will be defined for you.
+          ## Example:
+          # message: "Triggered From GitHub Actions CI ${{ github.sha }}"
+
+      - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.0
+        id: plan-output
+        with:
+          plan: ${{ steps.run.outputs.plan_id }}
+
+      ## REQUIRED: Workflow permissions: `Read and write permissions`
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // 1. Retrieve existing bot comments for the PR
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terraform Cloud Plan Output')
+            })
+            const output = `#### Terraform Cloud Plan Output
+               \`\`\`\n
+               Plan: ${{ steps.plan-output.outputs.add }} to add, ${{ steps.plan-output.outputs.change }} to change, ${{ steps.plan-output.outputs.destroy }} to destroy.
+               [Terraform Cloud Plan](${{ steps.run.outputs.run_link }})
+               \`\`\`
+               `
+            // 3. If we have a comment, update it, otherwise create a new one
+            if (botComment) {
+              github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: output
+              })
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: output
+              })
+            }
+

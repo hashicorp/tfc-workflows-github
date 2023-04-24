@@ -1,0 +1,52 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: 'TFC - Plan Output'
+description: "Returns the plan details for the provided Plan ID"
+
+inputs:
+  # global flags
+  hostname:
+    required: false
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    default: ""
+  token:
+    required: false
+    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    default: ""
+  organization:
+    required: false
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    default: ""
+  ## required
+  plan:
+    description: "The plan ID to retrieve plan details and JSON execution plan."
+    required: true
+
+outputs:
+  status:
+    description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
+  add:
+    description: "Resource Additions from the Terraform Cloud plan."
+  change:
+    description: "Resource Changes from the Terraform Cloud plan."
+  destroy:
+    description: "Resource Destructions from the Terraform Cloud plan."
+  plan_id:
+    description: "The provided plan ID."
+  plan_status:
+    description: "The status of the Plan."
+
+runs:
+  using: docker
+  image: 'docker://mjyocca/tfci:latest'
+  args:
+  - tfci
+  ## global flags
+  - -hostname=${{ inputs.hostname }}
+  - -token=${{ inputs.token }}
+  - -organization=${{ inputs.organization }}
+  ## command
+  - plan
+  - output
+  - -plan=${{ inputs.plan }}
