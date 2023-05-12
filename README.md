@@ -31,8 +31,8 @@ Supported Actions:
 * [apply-run](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/apply-run/action.yml): Applies a run that is paused waiting for confirmation after a plan.
 * [discard-run](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/discard-run/action.yml): Skips any remaining work on runs that are paused waiting for confirmation or priority.
 * [cancel-run](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/cancel-run/action.yml): Interrupts a run that is currently planning or applying.
-* [show-run](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/show-run/action.yml): Returns run details for the corresponding run ID.
-* [plan-output](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/plan-output/action.yml): Retrieves the JSON execution and details for a given plan.
+* [show-run](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/show-run/action.yml): Returns run details for the corresponding Run ID.
+* [plan-output](https://github.com/hashicorp/tfc-workflows-github/blob/main/actions/plan-output/action.yml): Returns the plan details for the provided Plan ID.
 
 ## Contributing Guideline
 
