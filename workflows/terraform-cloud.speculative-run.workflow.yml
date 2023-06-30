@@ -46,6 +46,8 @@ jobs:
 
       - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.2
         id: run
+        ## Allows job to continue on if any phase of the run errors
+        continue_on_error: true
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
