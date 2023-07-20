@@ -9,7 +9,7 @@ on:
 
 jobs:
   call-jira-sync:
-    uses: hashicorp/tfc-workflows-tooling/.github/workflows/jira-issue-sync.workflow.yml
+    uses: hashicorp/tfc-workflows-tooling/.github/workflows/jira-issue-sync.workflow.yml@main
     secrets: inherit
     with:
       project: TF
