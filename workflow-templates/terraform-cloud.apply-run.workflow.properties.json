@@ -1,0 +1,11 @@
+{
+  "name": "Terraform Cloud Apply Run",
+  "description": "This template is pre-configured to create an applyable run in Terraform Cloud. If the plan phase is successful, the run will be applied for the specified workspace.",
+  "categories": [
+      "Terraform",
+      "deployment"
+  ],
+  "filePatterns": [
+      ".*\\.tf$"
+  ]
+}
