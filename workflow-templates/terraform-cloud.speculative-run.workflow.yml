@@ -37,15 +37,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.3
         id: upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           directory: ${{ env.CONFIG_DIRECTORY }}
           speculative: true
 
-      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.3
         id: run
+        ## run may fail, if so continue to output PR comment
+        ## step.terraform-cloud-check-run-status will fail job after pr comment is created/updated.
+        continue-on-error: true
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
@@ -54,7 +57,7 @@ jobs:
           ## Example:
           # message: "Triggered From GitHub Actions CI ${{ github.sha }}"
 
-      - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.3
         id: plan-output
         with:
           plan: ${{ steps.run.outputs.plan_id }}
@@ -97,3 +100,11 @@ jobs:
               })
             }
 
+        ## Check Run Status, if not planned_and_finished fail the job
+      - id: terraform-cloud-check-run-status
+        if: ${{ steps.run.outputs.run_status != 'planned_and_finished'}}
+        run: |
+          echo "Terraform Cloud Run Failed or Requires Further Attention"
+          echo "Run Status: '${{ steps.run.outputs.run_status }}'"
+          echo "${{ steps.run.outputs.run_link }}"
+          exit 1
