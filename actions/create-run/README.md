@@ -60,7 +60,7 @@ Like with the other actions, you can specify hostname, token, and organization a
 This specific example does not pass a configuraiton version id, so the run defaults to the workspace's most recently used version. [Read more about create run behavior in the Terraform Cloud API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run)
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.2
+- uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
   id: run
   with:
     workspace: "my-workspace"
@@ -79,13 +79,13 @@ This specific example does not pass a configuraiton version id, so the run defau
 Creating a new run with recently uploaded configuration in a previous step
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.2
+- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
   id: upload
   with:
     workspace: ${{ env.TF_WORKSPACE }}
     directory: ${{ env.TF_DIRECTORY }}
 
-- uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.2
+- uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
   id: run
   with:
     workspace: ${{ env.TF_WORKSPACE }}

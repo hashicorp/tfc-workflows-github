@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
         id: upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
