@@ -38,7 +38,7 @@ For convenience, you are also able to specify these values within the GitHub Act
 
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.2
+- uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.4
   # assign id attribute to reference in subsequent steps
   id: apply
   # if want to and handle automation if apply fails
@@ -80,19 +80,19 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
-      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
         id: upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           directory: ${{ env.TF_DIRECTORY }}
 
-      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
         id: create-run
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
 
-      - uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.2
+      - uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.4
         # assign id attribute to reference in subsequent steps
         id: apply
         with:
