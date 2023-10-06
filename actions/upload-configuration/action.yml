@@ -24,7 +24,7 @@ inputs:
     description: "The name of the workspace to create the new configuration version in."
   directory:
     required: true
-    description: "Path to the configuration files on disk. If the Terraform Working Directory is configured in the workspace the path is relative to this."
+    description: "Path to the configuration files on disk. Relative to the working directory of the workspace if configured"
   # optional
   speculative:
     required: false
@@ -43,15 +43,15 @@ outputs:
 
 runs:
   using: docker
-  image: 'docker://hashicorp/tfci:v1.0.4'
+  image: "docker://hashicorp/tfci:v1.0.4"
   args:
-  - tfci
-  ## global flags
-  - -hostname=${{ inputs.hostname }}
-  - -token=${{ inputs.token }}
-  - -organization=${{ inputs.organization }}
-  ## command arguments
-  - upload
-  - -workspace=${{ inputs.workspace }}
-  - -directory=${{ inputs.directory }}
-  - -speculative=${{ inputs.speculative }}
+    - tfci
+    ## global flags
+    - -hostname=${{ inputs.hostname }}
+    - -token=${{ inputs.token }}
+    - -organization=${{ inputs.organization }}
+    ## command arguments
+    - upload
+    - -workspace=${{ inputs.workspace }}
+    - -directory=${{ inputs.directory }}
+    - -speculative=${{ inputs.speculative }}
