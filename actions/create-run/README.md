@@ -2,9 +2,11 @@
 
 *Requires that the workspace already exists within Terraform Cloud.*
 
-Performs a new plan run in Terraform Cloud, using a configuration version and the workspace's current variables.
+Performs an API driven run in Terraform Cloud, using a configuration version and the workspace's current variables. If a configuration version is not provided, will default to the workspace's most recently used version. [Terraform Cloud Create-Run API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run).
 
 This action will wait until the run status has reached a terminal/final state.
+
+[Terraform Cloud API-driven Run Workflow](https://developer.hashicorp.com/terraform/cloud-docs/run/api)
 
 ## Behaviors / Expected Outcomes
 * If the Plan reaches a failured state, will return `Error` status and status code of `1`.
@@ -14,16 +16,19 @@ This action will wait until the run status has reached a terminal/final state.
 
 ## Action Inputs / Outputs
 
-See `./action.yml` file for all available inputs and outputs.
+To view all available inputs and outputs, see `./action.yml` [file](./action.yml).
 
-#### `TF_VAR_*` Environment variables
-Recommended to use [Terraform Cloud workspace variables and variable sets](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/variables), however you are able to pass variables during run creation via environment variables.
-* See [API Docs](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run).
-* [Terraform Complex Typed Values](https://developer.hashicorp.com/terraform/language/values/variables#complex-typed-values)
+### Variables
 
-Example:
+#### `TF_VAR_*` Environment variable(s)
+Terraform Cloud API runs allow you to specify a list of variables using key and value attributes. These variables can be configured using environment variables with the `TF_VAR_*` naming convention. These variables take precedence over variables with the same key applied to the workspace(e.g., variable sets). For greater flexibility and features, it's recommended to use Terraform Cloud [workspace variables and variable sets](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/variables).
 
-You can specify variables like:
+> [!Note]
+All values must be expressed as an HCL literal in the same syntax you would use when writing Terraform code. Variables expressed as `string` will need to be escaped to include double quotations like, `TF_VAR_image_id="\"ami-my-custom-image\""` or `TF_VAR_image_id='"ami-my-custom-image'"`. [Read more on Terraform complex typed values](https://developer.hashicorp.com/terraform/language/values/variables#complex-typed-values)
+
+
+In your GitHub Action workflow file, you can specify variables using the `env` keyword at either the job or workflow level.
+
 ```yml
 env:
   TF_VAR_image_id="\"ami-abc123\"" ## string variable
