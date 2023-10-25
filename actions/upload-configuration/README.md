@@ -2,7 +2,7 @@
 
 *Requires that the workspace already exists within Terraform Cloud.*
 
-Creates and uploads configuration files for a provided Terraform Cloud workspace.
+Creates and uploads configuration version containing files for a specified Terraform Cloud Workspace.
 
 This action will wait until the upload has been successful or has failed/timeout.
 
@@ -13,7 +13,61 @@ This action will wait until the upload has been successful or has failed/timeout
 
 ## Action Inputs / Outputs
 
-See `./action.yml` file for all available inputs and outputs.
+To view all available inputs and outputs, see `./action.yml` [file](./action.yml).
+
+### workspace (required)
+
+The name of the Terraform Cloud Workspace
+
+### directory (required)
+
+Filesystem path containing the Terraform Configuration to upload.
+
+You can specify the relative or absolute path to the Terraform configuration in your project.
+
+GitHub Docker container actions maps the default working directory (`GITHUB_WORKSPACE`) on the action runner with the `/github/workspace` directory on the container.
+
+
+#### Example
+With the following **Project structure**
+
+```
+├── .github/
+│   └── workflows/
+│       └── terraform-cloud-speculative.workflows.yml
+└── terraform/
+    └── main.tf
+```
+
+##### Relative Path Example
+
+***terraform-cloud-speculative.workflows.yml***
+```yml
+# ...
+- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+  id: upload
+  with:
+    workspace: ${{ env.TF_WORKSPACE }}
+    directory: "./terraform"
+```
+
+##### Absolute Path Example
+
+***terraform-cloud-speculative.workflows.yml***
+```yml
+# ...
+- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+  id: upload
+  with:
+    workspace: ${{ env.TF_WORKSPACE }}
+    directory: "/github/workspace/terraform"
+```
+
+### speculative
+
+When true, this configuration version may only be used to create runs which are speculative, that is, can neither be confirmed nor applied.
+
+Default: `false`
 
 ## Example Usage
 
