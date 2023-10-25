@@ -2,7 +2,8 @@
 
 *Requires that the workspace already exists within Terraform Cloud.*
 
-Creates and uploads configuration version containing files for a specified Terraform Cloud Workspace.
+Creates a configuration version and uploads the directory containing files for a specified Terraform Cloud Workspace. This will not set, `auto-queue-runs`, and will need to use `create-run` action to start a new Terraform Cloud API run.
+
 
 This action will wait until the upload has been successful or has failed/timeout.
 
@@ -23,13 +24,15 @@ The name of the Terraform Cloud Workspace
 
 Filesystem path containing the Terraform Configuration to upload.
 
-You can specify the relative or absolute path to the Terraform configuration in your project.
+You can specify the relative path to the root of your project or absolute path to the Terraform configuration.
 
-GitHub Docker container actions maps the default working directory (`GITHUB_WORKSPACE`) on the action runner with the `/github/workspace` directory on the container. This volume mapping is instrumented with a bindmount volume when the container is executed. (`-v "${GITHUB_WORKSPACE}":"/github/workspace"`)
+GitHub custom Docker container actions maps the default working directory (`GITHUB_WORKSPACE`) on the action runner with the `/github/workspace` working directory on the container. This volume mapping is instrumented with a bindmount volume when the container is executed (`-v "${GITHUB_WORKSPACE}":"/github/workspace"`).
 
+#### Example(s)
 
-#### Example
-With the following **Project structure**
+##### Relative Path Example
+
+**Project structure**
 
 ```
 ├── .github/
@@ -38,8 +41,6 @@ With the following **Project structure**
 └── terraform/
     └── main.tf
 ```
-
-##### Relative Path Example
 
 ***terraform-cloud-speculative.workflows.yml***
 ```yml
@@ -52,6 +53,16 @@ With the following **Project structure**
 ```
 
 ##### Absolute Path Example
+
+**Project structure**
+
+```
+├── .github/
+│   └── workflows/
+│       └── terraform-cloud-speculative.workflows.yml
+└── terraform/
+    └── main.tf
+```
 
 ***terraform-cloud-speculative.workflows.yml***
 ```yml
