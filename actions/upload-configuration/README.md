@@ -25,7 +25,7 @@ Filesystem path containing the Terraform Configuration to upload.
 
 You can specify the relative or absolute path to the Terraform configuration in your project.
 
-GitHub Docker container actions maps the default working directory (`GITHUB_WORKSPACE`) on the action runner with the `/github/workspace` directory on the container.
+GitHub Docker container actions maps the default working directory (`GITHUB_WORKSPACE`) on the action runner with the `/github/workspace` directory on the container. This volume mapping is instrumented with a bindmount volume when the container is executed. (`-v "${GITHUB_WORKSPACE}":"/github/workspace"`)
 
 
 #### Example
