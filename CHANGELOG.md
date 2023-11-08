@@ -1,5 +1,9 @@
 # UNRELEASED
 
+# v1.1.1
+* Adds new `actions/workspace-output` action to fetch the latest state version output(s) for a given Terraform Cloud Workspace.
+* Bug fixes and enhancements from [tfc-workflows-tooling@v1.1.1](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.1.1)
+
 # v1.0.4
 * Fixes issue for missing `payload` output for `create-run`, `show-run`, `upload-configuration`, and `plan-output` actions from [tfc-workflows-tooling@v1.0.4](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.0.4)
 

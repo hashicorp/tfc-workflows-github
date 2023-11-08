@@ -45,7 +45,7 @@ GitHub custom Docker container actions maps the default working directory (`GITH
 ***terraform-cloud-speculative.workflows.yml***
 ```yml
 # ...
-- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.1.1
   id: upload
   with:
     workspace: ${{ env.TF_WORKSPACE }}
@@ -67,7 +67,7 @@ GitHub custom Docker container actions maps the default working directory (`GITH
 ***terraform-cloud-speculative.workflows.yml***
 ```yml
 # ...
-- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+- uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.1.1
   id: upload
   with:
     workspace: ${{ env.TF_WORKSPACE }}
@@ -95,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.1.1
         id: upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
