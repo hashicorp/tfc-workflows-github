@@ -1,8 +1,8 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-name: 'TFC - Discard Run'
-description: "Skips any remaining work on runs that are paused waiting for confirmation or priority."
+name: "TFC - Workspace Output"
+description: "Returns JSON array of the latest state-version output(s) for a given Terraform Cloud workspace."
 
 inputs:
   # global flags
@@ -18,33 +18,28 @@ inputs:
     required: false
     description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
     default: ""
-  run:
+  # required
+  workspace:
     required: true
-    description: "The run ID to discard."
-  comment:
-    required: false
-    description: "An optional comment about the run."
-    default: ""
+    description: "The name of the workspace to create the new configuåration version in."
 
 outputs:
   status:
     description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
-  run_id:
-    description: "The provided run ID."
-  run_status:
-    description: "The current status of the Terraform Cloud run."
+  outputs:
+    description: "JSON array containing the workspace outputs. Sensitive values are redacted."
 
 runs:
   using: docker
-  image: 'docker://hashicorp/tfci:v1.1.1'
+  image: "docker://hashicorp/tfci:v1.1.1"
   args:
     - tfci
     ## global flags
     - -hostname=${{ inputs.hostname }}
     - -token=${{ inputs.token }}
     - -organization=${{ inputs.organization }}
-    ## command
-    - run
-    - discard
-    - -run=${{ inputs.run }}
-    - -comment=${{ inputs.comment }}
+    ## command arguments
+    - workspace
+    - output
+    - list
+    - -workspace=${{ inputs.workspace }}
