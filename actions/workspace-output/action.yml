@@ -16,7 +16,7 @@ inputs:
     default: ""
   organization:
     required: false
-    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable"
+    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
     default: ""
   # required
   workspace:
