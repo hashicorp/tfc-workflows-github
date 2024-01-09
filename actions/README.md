@@ -20,7 +20,7 @@ For convenience, you are also able to specify these values within the GitHub Act
 
 ### `organization`
 
-**Optional** The name of the organization in Terraform Cloud. Defaults to reading `TF_ORGANIZATION` environment variable.
+**Optional** The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable.
 
 ## Environment Variables
 
@@ -28,7 +28,7 @@ For convenience, you are also able to specify these values within the GitHub Act
 | ----------------- |--------------------| ---------------------------------------------------------------------------------------------------------------- |
 | `TF_HOSTNAME`     | `app.terraform.io` | The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud. |
 | `TF_API_TOKEN`    | `n/a`              | The token used to authenticate with Terraform Cloud. [API Token Docs](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens)                                                           |
-| `TF_ORGANIZATION` | `n/a`              | The name of the organization in Terraform Cloud.                                                                 |
+| `TF_CLOUD_ORGANIZATION` | `n/a`              | The name of the organization in Terraform Cloud.                                                                 |
 | `TF_MAX_TIMEOUT`  | `1h`               | Max wait timeout to wait for actions to reach desired or errored state. ex: `1h30`, `30m`                                         |
 | `TF_VAR_*`        | `n/a`              | Only applicable for create-run action. Note: strings must be escaped. ex: `TF_VAR_image_id="\"ami-abc123\""`. All values must be expressed as an HCL literal in the same syntax you would use when writing Terraform code. [Create Run API Docs](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run)                                 |
 | `TF_LOG`          | `OFF`              | Debugging log level options: `OFF`, `ERROR`, `INFO`, `DEBUG`                                                     |
