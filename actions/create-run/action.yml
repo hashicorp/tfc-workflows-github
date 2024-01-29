@@ -33,7 +33,15 @@ inputs:
     default: ""
   plan_only:
     required: false
-    description: Specifies if this is a speculative, plan-only run that Terraform cannot apply."
+    description: "Specifies if this is a speculative, plan-only run that Terraform cannot apply."
+    default: "false"
+  save_plan:
+    required: false
+    description: "Specifies if the plan should be saved for future reference."
+    default: "false"
+  is_destroy:
+    required: false
+    description: "Specifies if this is a destroy run."
     default: "false"
 
 outputs:
@@ -62,7 +70,7 @@ outputs:
 
 runs:
   using: docker
-  image: 'docker://hashicorp/tfci:v1.1.1'
+  image: 'docker://hashicorp/tfci:v1.2.0'
   args:
   - tfci
   ## global flags
@@ -76,3 +84,5 @@ runs:
   - -configuration_version=${{ inputs.configuration_version }}
   - -message=${{ inputs.message }}
   - -plan-only=${{ inputs.plan_only }}
+  - -save-plan=${{ inputs.save_plan }}
+  - -is-destroy=${{ inputs.is_destroy }}

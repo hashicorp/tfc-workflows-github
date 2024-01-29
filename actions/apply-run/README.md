@@ -17,7 +17,7 @@ See `./action.yml` file for all available inputs and outputs.
 ## Example Usage
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.1.1
+- uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.2.0
   # assign id attribute to reference in subsequent steps
   id: apply
   # if want to and handle automation if apply fails
@@ -42,7 +42,7 @@ jobs:
     steps:
       ...
 
-      - uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.1.1
+      - uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.2.0
         # assign id attribute to reference in subsequent steps
         id: apply
         with:
