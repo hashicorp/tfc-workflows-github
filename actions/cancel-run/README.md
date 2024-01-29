@@ -11,7 +11,7 @@ See `./action.yml` file for all available inputs and outputs.
 ## Example Usage
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/cancel-run@v1.1.1
+- uses: hashicorp/tfc-workflows-github/actions/cancel-run@v1.2.0
   id: cancel
   with:
     hostname: "my.tfe.instance.io" # if using Terraform Cloud Enterprise
