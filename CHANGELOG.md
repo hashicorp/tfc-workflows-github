@@ -1,5 +1,9 @@
 # UNRELEASED
 
+# v1.2.0
+* Adds support for saved plans and destroy runs by @aaabdelgany [#36](https://github.com/hashicorp/tfc-workflows-github/pull/36)
+* Bug fixes and enhancements from [tfc-workflows-tooling@v1.2.0](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.2.0)
+
 # v1.1.1
 * Adds new `actions/workspace-output` action to fetch the latest state version output(s) for a given Terraform Cloud Workspace.
 * Bug fixes and enhancements from [tfc-workflows-tooling@v1.1.1](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.1.1)
