@@ -43,6 +43,10 @@ inputs:
     required: false
     description: "Specifies if this is a destroy run."
     default: "false"
+  target:
+    required: false
+    description: "Limit the planning operation to only the given module, resource, or resource instance and all of its dependencies. You can use this option multiple times to include more than one object. This is for exceptional use only. e.g. -target=aws_s3_bucket.foo"
+    default: ""
 
 outputs:
   status:
@@ -70,7 +74,7 @@ outputs:
 
 runs:
   using: docker
-  image: 'docker://hashicorp/tfci:v1.2.0'
+  image: 'docker://hashicorp/tfci:v1.3.0'
   args:
   - tfci
   ## global flags
@@ -86,3 +90,4 @@ runs:
   - -plan-only=${{ inputs.plan_only }}
   - -save-plan=${{ inputs.save_plan }}
   - -is-destroy=${{ inputs.is_destroy }}
+  - -target=${{ inputs.target }}

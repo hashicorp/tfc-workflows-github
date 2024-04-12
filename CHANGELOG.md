@@ -1,5 +1,9 @@
 # UNRELEASED
 
+# v1.3.0
+* Adds support for `target` input for `create-run` action by @trutled3 [#97](https://github.com/hashicorp/tfc-workflows-tooling/pull/97)
+* Bug fixes and enhancements from [tfc-workflows-tooling@v1.3.0](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.3.0)
+
 # v1.2.0
 * Adds support for saved plans and destroy runs by @aaabdelgany [#36](https://github.com/hashicorp/tfc-workflows-github/pull/36)
 * Bug fixes and enhancements from [tfc-workflows-tooling@v1.2.0](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.2.0)
