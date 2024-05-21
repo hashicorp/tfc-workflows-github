@@ -1,4 +1,4 @@
-# This template is pre-configured to run what's known as a speculative plan in Terraform Cloud.
+# This template is pre-configured to run what's known as a speculative plan in HCP Terraform.
 # Speculative plans are plan-only runs to test changes to configuration. Perfect for code reviews on a Pull Request.
 #
 # This workflow is configured to trigger when a pull request is opened against your `main` branch,
@@ -6,7 +6,7 @@
 #
 # NOTE: The last step in this template includes a script that will upsert a PR comment. (REQUIRES `Read and write permissions`)
 ---
-name: Terraform Cloud Speculative Run
+name: HCP Terraform Speculative Run
 
 on:
   pull_request:
@@ -19,9 +19,9 @@ on:
 
 ## Add shared Environment Variables across jobs here ##
 env:
-  TF_CLOUD_ORGANIZATION: "<<INPUT REQUIRED>>" ## Name of your existing Terraform Cloud Organization. RECOMMENDED: use repository variables. ex. "${{ vars.TF_CLOUD_ORGANIZATION }}"
-  TF_API_TOKEN: "<<INPUT REQUIRED>>" ## Terraform Cloud API Token. RECOMMENDED: replace with github action secrets. ex. "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "<<INPUT REQUIRED>>" ## Name of your existing workspace in Terraform Cloud.
+  TF_CLOUD_ORGANIZATION: "<<INPUT REQUIRED>>" ## Name of your existing HCP Terraform Organization. RECOMMENDED: use repository variables. ex. "${{ vars.TF_CLOUD_ORGANIZATION }}"
+  TF_API_TOKEN: "<<INPUT REQUIRED>>" ## HCP Terraform API Token. RECOMMENDED: replace with github action secrets. ex. "${{ secrets.TF_API_TOKEN }}"
+  TF_WORKSPACE: "<<INPUT REQUIRED>>" ## Name of your existing workspace in HCP Terraform.
   CONFIG_DIRECTORY: "<<INPUT REQUIRED>>" ## Directory of your Terraform Configuration. Relative to the project root.
   ## Additional env variables
   # TF_LOG: DEBUG ## Helpful for troubleshooting
@@ -75,13 +75,13 @@ jobs:
               issue_number: context.issue.number,
             })
             const botComment = comments.find(comment => {
-              return comment.user.type === 'Bot' && comment.body.includes('Terraform Cloud Plan Output')
+              return comment.user.type === 'Bot' && comment.body.includes('HCP Terraform Plan Output')
             })
-            const output = `#### Terraform Cloud Plan Output
+            const output = `#### HCP Terraform Plan Output
                \`\`\`\n
                Plan: ${{ steps.plan-output.outputs.add }} to add, ${{ steps.plan-output.outputs.change }} to change, ${{ steps.plan-output.outputs.destroy }} to destroy.
                \`\`\`
-               [Terraform Cloud Plan](${{ steps.run.outputs.run_link }})
+               [HCP Terraform Plan](${{ steps.run.outputs.run_link }})
                `
             // 3. If we have a comment, update it, otherwise create a new one
             if (botComment) {
@@ -104,7 +104,7 @@ jobs:
       - id: terraform-cloud-check-run-status
         if: ${{ steps.run.outputs.run_status != 'planned_and_finished'}}
         run: |
-          echo "Terraform Cloud Run Failed or Requires Further Attention"
+          echo "HCP Terraform Run Failed or Requires Further Attention"
           echo "Run Status: '${{ steps.run.outputs.run_status }}'"
           echo "${{ steps.run.outputs.run_link }}"
           exit 1
