@@ -1,8 +1,8 @@
 # Upload Configuration Action
 
-*Requires that the workspace already exists within Terraform Cloud.*
+*Requires that the workspace already exists within HCP Terraform.*
 
-Creates a configuration version and uploads the directory containing files for a specified Terraform Cloud Workspace. This will not set, `auto-queue-runs`, and will need to use `create-run` action to start a new Terraform Cloud API run.
+Creates a configuration version and uploads the directory containing files for a specified HCP Terraform Workspace. This will not set, `auto-queue-runs`, and will need to use `create-run` action to start a new HCP Terraform API run.
 
 
 This action will wait until the upload has been successful or has failed/timeout.
@@ -18,7 +18,7 @@ To view all available inputs and outputs, see `./action.yml` [file](./action.yml
 
 ### workspace (required)
 
-The name of the Terraform Cloud Workspace
+The name of the HCP Terraform Workspace
 
 ### directory (required)
 

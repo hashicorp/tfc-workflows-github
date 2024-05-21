@@ -1,6 +1,6 @@
 # Show Run Action
 
-Returns run details for the provided Terraform Cloud run ID.
+Returns run details for the provided HCP Terraform run ID.
 
 ## Action Inputs / Outputs
 

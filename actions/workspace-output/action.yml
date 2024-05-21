@@ -2,21 +2,21 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name: "TFC - Workspace Output"
-description: "Returns JSON array of the latest state-version output(s) for a given Terraform Cloud workspace."
+description: "Returns JSON array of the latest state-version output(s) for a given HCP Terraform workspace."
 
 inputs:
   # global flags
   hostname:
     required: false
-    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
     default: ""
   token:
     required: false
-    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    description: "The token used to authenticate with HCP Terraform. Defaults to reading `TF_API_TOKEN` environment variable"
     default: ""
   organization:
     required: false
-    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
+    description: "The name of the organization in HCP Terraform. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
     default: ""
   # required
   workspace:

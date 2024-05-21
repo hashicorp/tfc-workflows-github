@@ -8,15 +8,15 @@ inputs:
   # global flags
   hostname:
     required: false
-    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
     default: ""
   token:
     required: false
-    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable."
+    description: "The token used to authenticate with HCP Terraform. Defaults to reading `TF_API_TOKEN` environment variable."
     default: ""
   organization:
     required: false
-    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable."
+    description: "The name of the organization in HCP Terraform. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable."
     default: ""
   run:
     required: true
@@ -32,7 +32,7 @@ outputs:
   run_id:
     description: "The provided run ID."
   run_status:
-    description: "The current status of the Terraform Cloud run."
+    description: "The current status of the HCP Terraform run."
 
 runs:
   using: docker

@@ -9,4 +9,4 @@
 ## Important Resources
 * [GitHub Actions Documentation](https://docs.github.com/en/actions)
 * [GitHub Assigning Permissions to Jobs](https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs)
-* [Terraform Cloud Documentation](https://developer.hashicorp.com/terraform/cloud-docs)
+* [HCP Terraform Documentation](https://developer.hashicorp.com/terraform/cloud-docs)
