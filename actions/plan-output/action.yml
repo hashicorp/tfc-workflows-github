@@ -8,15 +8,15 @@ inputs:
   # global flags
   hostname:
     required: false
-    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
     default: ""
   token:
     required: false
-    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    description: "The token used to authenticate with HCP Terraform. Defaults to reading `TF_API_TOKEN` environment variable"
     default: ""
   organization:
     required: false
-    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
+    description: "The name of the organization in HCP Terraform. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
     default: ""
   ## required
   plan:
@@ -27,11 +27,11 @@ outputs:
   status:
     description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
   add:
-    description: "Resource Additions from the Terraform Cloud plan."
+    description: "Resource Additions from the HCP Terraform plan."
   change:
-    description: "Resource Changes from the Terraform Cloud plan."
+    description: "Resource Changes from the HCP Terraform plan."
   destroy:
-    description: "Resource Destructions from the Terraform Cloud plan."
+    description: "Resource Destructions from the HCP Terraform plan."
   plan_id:
     description: "The provided plan ID."
   plan_status:

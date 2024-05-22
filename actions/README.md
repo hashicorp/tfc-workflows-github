@@ -1,8 +1,8 @@
-# Terraform Cloud Workflow Actions
+# HCP Terraform Workflow Actions
 
-All of these actions assume Terraform Cloud resources such as Organization, Workspace, etc. already exist.
+All of these actions assume HCP Terraform resources such as Organization, Workspace, etc. already exist.
 
-They do not create these resources for you. If you are looking for this type of functionality, look to the [`Terraform Cloud/Enterprise Provider`](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs).
+They do not create these resources for you. If you are looking for this type of functionality, look to the [`HCP Terraform/Enterprise Provider`](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs).
 
 ## Shared Inputs
 
@@ -12,23 +12,23 @@ For convenience, you are also able to specify these values within the GitHub Act
 
 ### `hostname`
 
-**Optional** The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (`app.terraform.io`) if `TF_HOSTNAME` environment variable is not set.
+**Optional** The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform (`app.terraform.io`) if `TF_HOSTNAME` environment variable is not set.
 
 ### `token`
 
-**Optional** The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable. [Terraform Cloud API Token Docs](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens).
+**Optional** The token used to authenticate with HCP Terraform. Defaults to reading `TF_API_TOKEN` environment variable. [HCP Terraform API Token Docs](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens).
 
 ### `organization`
 
-**Optional** The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable.
+**Optional** The name of the organization in HCP Terraform. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable.
 
 ## Environment Variables
 
 | Variable Name     | Default            |  Description                                                                                                     |
 | ----------------- |--------------------| ---------------------------------------------------------------------------------------------------------------- |
-| `TF_HOSTNAME`     | `app.terraform.io` | The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud. |
-| `TF_API_TOKEN`    | `n/a`              | The token used to authenticate with Terraform Cloud. [API Token Docs](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens)                                                           |
-| `TF_CLOUD_ORGANIZATION` | `n/a`              | The name of the organization in Terraform Cloud.                                                                 |
+| `TF_HOSTNAME`     | `app.terraform.io` | The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform. |
+| `TF_API_TOKEN`    | `n/a`              | The token used to authenticate with HCP Terraform. [API Token Docs](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens)                                                           |
+| `TF_CLOUD_ORGANIZATION` | `n/a`              | The name of the organization in HCP Terraform.                                                                 |
 | `TF_MAX_TIMEOUT`  | `1h`               | Max wait timeout to wait for actions to reach desired or errored state. ex: `1h30`, `30m`                                         |
 | `TF_VAR_*`        | `n/a`              | Only applicable for create-run action. Note: strings must be escaped. ex: `TF_VAR_image_id="\"ami-abc123\""`. All values must be expressed as an HCL literal in the same syntax you would use when writing Terraform code. [Create Run API Docs](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run)                                 |
 | `TF_LOG`          | `OFF`              | Debugging log level options: `OFF`, `ERROR`, `INFO`, `DEBUG`                                                     |
@@ -47,7 +47,7 @@ For convenience, you are also able to specify these values within the GitHub Act
     run: ${{ steps.create-run.outputs.run_id }}
     comment: "Confirmed from GitHub Actions CI"
     ## Can specify hostname,token,organization as direct inputs
-    hostname: "my.tfe.instance.io" # if using Terraform Cloud Enterprise
+    hostname: "my.tfe.instance.io" # if using HCP Terraform Enterprise
     organization: ${{ vars.TF_CLOUD_ORGANIZATION }} # Configured as GitHub configuration variable
     token: ${{ secrets.TF_API_TOKEN }} # Configured as GitHub Secret
     ## OR can specify as environment variables per step, job, or entire workflow file.

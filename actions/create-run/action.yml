@@ -2,21 +2,21 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name: 'TFC - Create Run'
-description: "Performs a new plan run in Terraform Cloud, using a configuration version and the workspace`s current variables"
+description: "Performs a new plan run in HCP Terraform, using a configuration version and the workspace`s current variables"
 
 inputs:
   # global flags
   hostname:
     required: false
-    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to Terraform Cloud (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
+    description: "The hostname of a Terraform Enterprise installation, if using Terraform Enterprise. Defaults to HCP Terraform (app.terraform.io) if `TF_HOSTNAME` environment variable is not set."
     default: ""
   token:
     required: false
-    description: "The token used to authenticate with Terraform Cloud. Defaults to reading `TF_API_TOKEN` environment variable"
+    description: "The token used to authenticate with HCP Terraform. Defaults to reading `TF_API_TOKEN` environment variable"
     default: ""
   organization:
     required: false
-    description: "The name of the organization in Terraform Cloud. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
+    description: "The name of the organization in HCP Terraform. Defaults to reading `TF_CLOUD_ORGANIZATION` environment variable"
     default: ""
   ## required
   workspace:
@@ -52,15 +52,15 @@ outputs:
   status:
     description: "The result of the operation. Possible values are `Success`, `Error` or `Timeout`"
   payload:
-    description: "JSON response of a Terraform Cloud run."
+    description: "JSON response of a HCP Terraform run."
   run_id:
     description: "The ID of the created run."
   run_status:
-    description: "The current status of the Terraform Cloud run."
+    description: "The current status of the HCP Terraform run."
   run_message:
     description: "The message attribute of the shown run."
   run_link:
-    description: "Link to view the run in Terraform Cloud."
+    description: "Link to view the run in HCP Terraform."
   plan_id:
     description: "The ID of the plan, associated to the created run."
   plan_status:

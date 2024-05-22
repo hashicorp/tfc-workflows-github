@@ -1,6 +1,6 @@
 # Apply Run Action
 
-Applies a run that is paused waiting for confirmation after a plan. Requires a valid Terraform Cloud Run ID.
+Applies a run that is paused waiting for confirmation after a plan. Requires a valid HCP Terraform Run ID.
 
 This action will wait until the apply has been successful or has failed/timeout.
 
@@ -23,7 +23,7 @@ See `./action.yml` file for all available inputs and outputs.
   # if want to and handle automation if apply fails
   continue-on-error: true
   with:
-    hostname: "my.tfe.instance.io" # if using Terraform Cloud Enterprise
+    hostname: "my.tfe.instance.io" # if using HCP Terraform Enterprise
     token: ${{ secrets.TF_API_TOKEN }} # recommend to store as repository secret
     run: ${{ steps.create-run.outputs.run_id }}
     comment: "Confirmed from GitHub Actions CI"

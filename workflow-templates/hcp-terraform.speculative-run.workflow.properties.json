@@ -1,0 +1,11 @@
+{
+  "name": "HCP Terraform Speculative Run",
+  "description": "This template is pre-configured to run what's known as a speculative plan in HCP Terraform. Speculative plans are plan-only runs to test changes to configuration. Perfect for code reviews on a Pull Request.",
+  "categories": [
+      "Terraform",
+      "deployment"
+  ],
+  "filePatterns": [
+      ".*\\.tf$"
+  ]
+}

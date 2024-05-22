@@ -1,12 +1,12 @@
 # Create Run Action
 
-*Requires that the workspace already exists within Terraform Cloud.*
+*Requires that the workspace already exists within HCP Terraform.*
 
-Performs an API driven run in Terraform Cloud, using a configuration version and the workspace's current variables. If a configuration version is not provided, will default to the workspace's most recently used version. [Terraform Cloud Create-Run API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run).
+Performs an API driven run in HCP Terraform, using a configuration version and the workspace's current variables. If a configuration version is not provided, will default to the workspace's most recently used version. [HCP Terraform Create-Run API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run).
 
 This action will wait until the run status has reached a terminal/final state.
 
-[Terraform Cloud API-driven Run Workflow](https://developer.hashicorp.com/terraform/cloud-docs/run/api)
+[HCP Terraform API-driven Run Workflow](https://developer.hashicorp.com/terraform/cloud-docs/run/api)
 
 ## Behaviors / Expected Outcomes
 * If the Plan reaches a failured state, will return `Error` status and status code of `1`.
@@ -21,7 +21,7 @@ To view all available inputs and outputs, see `./action.yml` [file](./action.yml
 ### Variables
 
 #### `TF_VAR_*` Environment variable(s)
-Terraform Cloud API runs allow you to specify a list of variables using key and value attributes. These variables can be configured using environment variables with the `TF_VAR_*` naming convention. These variables take precedence over variables with the same key applied to the workspace(e.g., variable sets). For greater flexibility and features, it's recommended to use Terraform Cloud [workspace variables and variable sets](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/variables).
+HCP Terraform API runs allow you to specify a list of variables using key and value attributes. These variables can be configured using environment variables with the `TF_VAR_*` naming convention. These variables take precedence over variables with the same key applied to the workspace(e.g., variable sets). For greater flexibility and features, it's recommended to use HCP Terraform [workspace variables and variable sets](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/variables).
 
 > [!Note]
 All values must be expressed as an HCL literal in the same syntax you would use when writing Terraform code. Variables expressed as `string` will need to be escaped to include double quotations like, `TF_VAR_image_id="\"ami-my-custom-image\""` or `TF_VAR_image_id='"ami-my-custom-image'"`. [Read more on Terraform complex typed values](https://developer.hashicorp.com/terraform/language/values/variables#complex-typed-values)
@@ -62,7 +62,7 @@ All values must be expressed as an HCL literal in the same syntax you would use 
 
 Like with the other actions, you can specify hostname, token, and organization as inputs OR as environment variables.
 
-This specific example does not pass a configuraiton version id, so the run defaults to the workspace's most recently used version. [Read more about create run behavior in the Terraform Cloud API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run)
+This specific example does not pass a configuraiton version id, so the run defaults to the workspace's most recently used version. [Read more about create run behavior in the HCP Terraform API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run#create-a-run)
 
 ```yml
 - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.0

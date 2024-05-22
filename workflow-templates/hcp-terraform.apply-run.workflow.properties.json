@@ -1,0 +1,11 @@
+{
+  "name": "HCP Terraform Apply Run",
+  "description": "This template is pre-configured to create an applyable run in HCP Terraform. If the plan phase is successful, the run will be applied for the specified workspace.",
+  "categories": [
+      "Terraform",
+      "deployment"
+  ],
+  "filePatterns": [
+      ".*\\.tf$"
+  ]
+}
