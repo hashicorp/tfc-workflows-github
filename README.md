@@ -13,8 +13,8 @@ The core tooling is a containerized go application, designed to work with GitHub
 
 ## Starter Workflow Templates
 
-* [Terraform Speculative Run (Pull Request Open/Edit Workflow)](https://github.com/hashicorp/tfc-workflows-github/blob/main/workflow-templates/terraform-cloud.speculative-run.workflow.yml): Workflow to run non-applyable speculative runs in HCP Terraform when a pull request has been opened/modified.
-* [Terraform Apply Run (Push to main branch/PR Merge to main Workflow)](https://github.com/hashicorp/tfc-workflows-github/blob/main/workflow-templates/terraform-cloud.apply-run.workflow.yml): Workflow to perform an apply run for a given workspace.
+* [Terraform Speculative Run (Pull Request Open/Edit Workflow)](https://github.com/hashicorp/tfc-workflows-github/blob/main/workflow-templates/hcp-terraform.speculative-run.workflow.yml): Workflow to run non-applyable speculative runs in HCP Terraform when a pull request has been opened/modified.
+* [Terraform Apply Run (Push to main branch/PR Merge to main Workflow)](https://github.com/hashicorp/tfc-workflows-github/blob/main/workflow-templates/hcp-terraform.apply-run.workflow.yml): Workflow to perform an apply run for a given workspace.
 
 
 ## Getting Started
