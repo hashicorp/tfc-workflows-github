@@ -1,5 +1,9 @@
 # UNRELEASED
 
+# v1.3.1
+* Bug fixes and enhancements from [tfc-workflows-tooling@v1.3.1](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.3.1)
+* Compiles for Linux regardless of current CPU architecture when using the provided Dockerfile by @ggambetti #113
+
 # v1.3.0
 * Adds support for `target` input for `create-run` action by @trutled3 [#97](https://github.com/hashicorp/tfc-workflows-tooling/pull/97)
 * Bug fixes and enhancements from [tfc-workflows-tooling@v1.3.0](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.3.0)

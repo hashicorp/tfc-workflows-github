@@ -10,7 +10,7 @@ See `./action.yml` file for all available inputs and outputs.
 
 ```yml
   - ...
-  - uses: hashicorp/tfc-workflows-github/actions/show-run@v1.3.0
+  - uses: hashicorp/tfc-workflows-github/actions/show-run@v1.3.1
     id: run
     with:
       run: ${{ steps.reference-run-id.outputs.run_id }}

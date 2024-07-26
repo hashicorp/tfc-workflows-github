@@ -9,7 +9,7 @@ See `./action.yml` file for all available inputs and outputs.
 ## Example Usage
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.0
+- uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.1
   id: plan-output
   with:
     plan: ${{ steps.run.outputs.plan_id }}
