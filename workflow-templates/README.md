@@ -9,4 +9,5 @@
 ## Important Resources
 * [GitHub Actions Documentation](https://docs.github.com/en/actions)
 * [GitHub Assigning Permissions to Jobs](https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs)
+* [GitHub setting permissions for `GITHUB_TOKEN`](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#setting-the-permissions-of-the-github_token-for-your-repository)
 * [HCP Terraform Documentation](https://developer.hashicorp.com/terraform/cloud-docs)
