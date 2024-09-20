@@ -63,6 +63,8 @@ jobs:
           plan: ${{ steps.run.outputs.plan_id }}
 
       ## REQUIRED: Workflow permissions: `Read and write permissions`
+      ## GITHUB_TOKEN is the built in token provided by GitHub Actions. It will need to be set to "permissive" in your repository settings
+      ## More information can be found here: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#setting-the-permissions-of-the-github_token-for-your-repository
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
         with:
