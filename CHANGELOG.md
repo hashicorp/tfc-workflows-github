@@ -1,5 +1,8 @@
 # UNRELEASED
 
+# v1.3.2
+* Bug fixes and enhancements from [tfc-workflows-tooling@v1.3.2](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.3.2)
+
 # v1.3.1
 * Bug fixes and enhancements from [tfc-workflows-tooling@v1.3.1](https://github.com/hashicorp/tfc-workflows-tooling/releases/tag/v1.3.1)
 * Compiles for Linux regardless of current CPU architecture when using the provided Dockerfile by @ggambetti [hashicorp/tfc-workflows-tooling#113](https://github.com/hashicorp/tfc-workflows-tooling/pull/113)
