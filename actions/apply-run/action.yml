@@ -38,7 +38,7 @@ outputs:
 
 runs:
   using: docker
-  image: 'docker://hashicorp/tfci:v1.3.1'
+  image: 'docker://hashicorp/tfci:v1.3.2'
   args:
   - tfci
   ## global flags
