@@ -11,7 +11,7 @@ See `./action.yml` file for all available inputs and outputs.
 ## Example Usage
 
 ```yml
-- uses: hashicorp/tfc-workflows-github/actions/discard-run@v1.3.1
+- uses: hashicorp/tfc-workflows-github/actions/discard-run@v1.3.2
   id: discard
   with:
     hostname: "my.tfe.instance.io" # if using HCP Terraform Enterprise
